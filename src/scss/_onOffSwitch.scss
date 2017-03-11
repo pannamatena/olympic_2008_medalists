@@ -1,0 +1,59 @@
+//
+// ON/OFF SWITCH
+//
+
+.onOffSwitch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  margin-right: $gap-mobile-large;
+  @include breakpoint(breakpoint-tablet-portrait) {
+    margin-right: $gap-tablet-large;
+  }
+  @include breakpoint(breakpoint-desktop-small) {
+    margin-right: $gap-desktop-large;
+  }
+  @include breakpoint(breakpoint-desktop-large) {
+    margin-right: $gap-desktopL-large;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+
+  input[type=checkbox] {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &-label {
+    padding-right: $gap-mobile-small;
+    @include breakpoint(breakpoint-tablet-portrait) {
+      padding-right: $gap-tablet-small;
+    }
+    @include breakpoint(breakpoint-desktop-small) {
+      padding-right: $gap-desktop-small;
+    }
+    @include breakpoint(breakpoint-desktop-large) {
+      padding-right: $gap-desktopL-small;
+    }
+  }
+
+  label {
+    display: inline-block;
+    width: $element-size;
+    height: $element-size;
+    border-radius: $border-radius-size;
+
+    cursor: pointer;
+    background: $color-inactive;
+  }
+
+  input[type=checkbox]:checked + label {
+    background: $green;
+  }
+
+}

@@ -1,0 +1,55 @@
+//
+// RESULT TABLE
+//
+
+.resultTable {
+
+  &-header,
+  &-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    &-countryName {
+      flex: 0.6;
+    }
+    &-gold,
+    &-silver,
+    &-bronze,
+    &-total {
+      flex: 0.1;
+      text-align: right;
+    }
+
+  }
+
+  &-header {
+    background: transparent;
+    font-size: $font-size-large;
+
+    &-gold {
+      background: url("../img/medal_gold.svg") center right no-repeat;
+      background-size: 1em;
+    }
+    &-silver {
+      background: url("../img/medal_silver.svg") center right no-repeat;
+      background-size: 1em;
+    }
+    &-bronze {
+      background: url("../img/medal_bronze.svg") center right no-repeat;
+      background-size: 1em;
+    }
+    &-total {
+      background: url("../img/medal_total.svg") center right no-repeat;
+      background-size: 1em;
+    }
+  }
+
+  &-row {
+    &:nth-child(odd) {
+      background: transparent;
+    }
+  }
+
+}

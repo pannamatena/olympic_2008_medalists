@@ -1,0 +1,38 @@
+//
+// RESULT FILTER
+//
+
+.resultFilter {
+  border-radius: $border-radius-size;
+  margin-bottom: $gap-mobile-normal;
+  @include breakpoint(breakpoint-tablet-portrait) {
+    margin-bottom: $gap-tablet-normal;
+  }
+  @include breakpoint(breakpoint-desktop-small) {
+    margin-bottom: $gap-desktop-normal;
+  }
+  @include breakpoint(breakpoint-desktop-large) {
+    margin-bottom: $gap-desktopL-normal;
+  }
+
+  &-label {
+    margin-bottom: $gap-mobile-small;
+    @include breakpoint(breakpoint-tablet-portrait) {
+      margin-bottom: $gap-tablet-small;
+    }
+    @include breakpoint(breakpoint-desktop-small) {
+      margin-bottom: $gap-desktop-small;
+    }
+    @include breakpoint(breakpoint-desktop-large) {
+      margin-bottom: $gap-desktopL-small;
+    }
+  }
+
+  &-inputContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+}

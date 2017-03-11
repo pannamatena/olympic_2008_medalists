@@ -1,0 +1,107 @@
+//
+// VARIABLES
+//
+
+// ==================================
+// BREAKPOINTS
+// ==================================
+$breakpoint-mobile-landscape: 'only screen and (min-width: 480px)';
+$breakpoint-tablet-portrait: 'only screen and (min-width: 600px)';
+$breakpoint-tablet-landscape: 'only screen and (min-width: 800px)';
+$breakpoint-desktop-small: 'only screen and (min-width: 1024px)';
+$breakpoint-desktop-large: 'only screen and (min-width: 1600px)';
+
+@mixin breakpoint($breakpoint) {
+  @if $breakpoint == breakpoint-mobile-landscape {
+    @media #{$breakpoint-mobile-landscape} {
+      @content;
+    }
+  } @else if $breakpoint == breakpoint-tablet-portrait {
+    @media #{$breakpoint-tablet-portrait} {
+      @content;
+    }
+  } @else if $breakpoint == breakpoint-tablet-landscape {
+    @media #{$breakpoint-tablet-landscape} {
+      @content;
+    }
+  } @else if $breakpoint == breakpoint-desktop-small {
+    @media #{$breakpoint-desktop-small} {
+      @content;
+    }
+  } @else if $breakpoint == breakpoint-desktop-large {
+    @media #{$breakpoint-desktop-large} {
+      @content;
+    }
+  }
+}
+
+$contentWidth-mobile: 100%;
+$contentWidth-tablet-portrait: 100%;
+$contentWidth-tablet-landscape: 750px;
+$contentWidth-desktop-small: 800px;
+$contentWidth-desktop-large: 1000px;
+
+// ==================================
+// GAPS
+// ==================================
+$gap-mobile-small: 10px;
+$gap-tablet-small: 10px;
+$gap-desktop-small: 15px;
+$gap-desktopL-small: 15px;
+
+$gap-mobile-normal: 10px;
+$gap-tablet-normal: 15px;
+$gap-desktop-normal: 20px;
+$gap-desktopL-normal: 20px;
+
+$gap-mobile-large: 15px;
+$gap-tablet-large: 25px;
+$gap-desktop-large: 30px;
+$gap-desktopL-large: 30px;
+
+// ==================================
+// FONTS
+// ==================================
+$font-family: 'roboto_condensedregular', Helvetica, Arial, sans-serif;
+
+$font-size-base-mobile: 12px;
+$font-size-base-tablet: 14px;
+$font-size-base-desktop: 16px;
+$font-size-base-desktopL: 18px;
+
+$font-size-small: 80%;
+$font-size-normal: 100%;
+$font-size-large: 120%;
+$font-size-xlarge: 140%;
+
+// ==================================
+// COLORS
+// ==================================
+$light: #d7d7e5;
+$dark: #0a0a10;
+$lightblue: #232330;
+$darkblue: #1a1a24;
+$green: #32c10c;
+
+$color-body-background: $dark;
+$color-panel-background: rgba(26,26,36,0.6); //darkblue
+
+$color-font-regular: $light;
+
+$color-active: $green;
+$color-inactive: $light;
+
+/*
+$color-font-link: $red;
+$color-font-link-hover: darken($red, 5%);
+$color-font-link-active: darken($red, 10%);
+*/
+
+// ==================================
+// OTHER
+// ==================================
+//$animation-general: 0.4s ease;
+
+$border-radius-size: 5px;
+
+$element-size: 20px;

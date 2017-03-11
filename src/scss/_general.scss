@@ -1,0 +1,78 @@
+//
+// GENERAL STYLE
+//
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+body {
+  background: linear-gradient($lightblue, $color-body-background, $color-body-background);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+#page_wrapper {
+  flex: 1;
+  background: url(../img/map.svg) center center no-repeat;
+  background-size: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $gap-mobile-normal 0;
+  @include breakpoint(breakpoint-tablet-portrait) {
+    padding: $gap-tablet-normal 0;
+  }
+  @include breakpoint(breakpoint-desktop-small) {
+    padding: $gap-desktop-normal 0;
+  }
+  @include breakpoint(breakpoint-desktop-large) {
+    padding: $gap-desktopL-normal 0;
+  }
+}
+
+.content-aligner {
+  width: $contentWidth-mobile;
+  padding: 0 $gap-mobile-normal;
+  @include breakpoint(breakpoint-tablet-portrait) {
+    width: $contentWidth-tablet-portrait;
+    padding: 0 $gap-tablet-normal;
+  }
+  @include breakpoint(breakpoint-tablet-landscape) {
+    width: $contentWidth-tablet-landscape;
+    padding: 0;
+  }
+  @include breakpoint(breakpoint-desktop-small) {
+    width: $contentWidth-desktop-small;
+  }
+  @include breakpoint(breakpoint-desktop-large) {
+    width: $contentWidth-desktop-large;
+  }
+}
+
+.panel {
+  background: $color-panel-background;
+  padding: $gap-mobile-small;
+  @include breakpoint(breakpoint-tablet-portrait) {
+    padding: $gap-tablet-small;
+  }
+  @include breakpoint(breakpoint-desktop-small) {
+    padding: $gap-desktop-small;
+  }
+  @include breakpoint(breakpoint-desktop-large) {
+    padding: $gap-desktopL-small;
+  }
+
+}
