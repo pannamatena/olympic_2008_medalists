@@ -92,6 +92,10 @@ describe('OlympicMedalDataAggregator', () => {
           },
           {
             country: 'ETH',
+            medal: 'Gold'
+          },
+          {
+            country: 'ETH',
             medal: 'Silver'
           },
         ];
@@ -99,7 +103,22 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should return the aggregated results per country', () => {
         const result = aggregator.getMedalCountsByCountry(testData);
-        expect(result).to.have.length(2);
+        expect(result).to.deep.equal([
+          {
+            bronze: 0,
+            country: 'ETH',
+            gold: 2,
+            silver: 1,
+            total: 3
+          },
+          {
+            bronze: 1,
+            country: 'KEN',
+            gold: 0,
+            silver: 0,
+            total: 1
+          }
+        ]);
       });
     });
   });
@@ -446,8 +465,8 @@ describe('OlympicMedalDataAggregator', () => {
         aggregator = new OlympicMedalDataAggregator();
         filterTypes = {
           gold: true,
-          silver: true,
-          bronze: true
+          silver: false,
+          bronze: false
         };
         testData = [
           {
@@ -460,7 +479,7 @@ describe('OlympicMedalDataAggregator', () => {
           {
             bronze: 1,
             country: 'ETH',
-            gold: 4,
+            gold: 0,
             silver: 3,
             total: 8
           },
@@ -476,7 +495,22 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should return the filtered results per country', () => {
         const result = aggregator.filterMedalCounts(testData, filterTypes);
-        expect(result).to.have.length(3);
+        expect(result).to.deep.equal([
+          {
+            bronze: 2,
+            country: 'KEN',
+            gold: 1,
+            silver: 3,
+            total: 6
+          },
+          {
+            bronze: 8,
+            country: 'USA',
+            gold: 23,
+            silver: 12,
+            total: 43
+          }
+        ]);
       });
     });
 
