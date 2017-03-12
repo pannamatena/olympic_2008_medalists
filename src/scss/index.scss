@@ -3,13 +3,11 @@
 //
 
 // Foundation
-@import "variables";
-
-// General styling
-@import "fonts";
-@import "general";
+@import "foundation/_variables";
+@import "foundation/_fonts";
+@import "foundation/_general";
 
 // Components
-@import "resultFilter";
-@import "onOffSwitch";
-@import "resultTable";
+@import "components/_resultFilter";
+@import "components/_onOffSwitch";
+@import "components/_resultTable";

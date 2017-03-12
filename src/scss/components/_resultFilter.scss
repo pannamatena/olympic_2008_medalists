@@ -3,7 +3,6 @@
 //
 
 .resultFilter {
-  border-radius: $border-radius-size;
   margin-bottom: $gap-mobile-normal;
   @include breakpoint(breakpoint-tablet-portrait) {
     margin-bottom: $gap-tablet-normal;
