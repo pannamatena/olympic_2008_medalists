@@ -100,7 +100,7 @@ module.exports = {
       {
         test: /\.scss/,
         include: paths.appSrc,
-        loaders: ['style', 'css', 'sass']
+        loaders: ['style', 'css', 'postcss', 'sass']
       },
       // Process JS with Babel.
       {

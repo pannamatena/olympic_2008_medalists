@@ -8,6 +8,10 @@ The project template was created using the [Create React App](https://github.com
 ## How to install?
 Just clone the repo and run `npm install`
 
+To start the dev server and run the app run `npm start`.
+
+To create a production build run `npm run build`.
+
 ## Tests
 Run unit tests with `npm run test`
 
