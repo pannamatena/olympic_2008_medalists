@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+/**
+ * A custom checkbox to enable filtering.
+ */
 class OnOffSwitch extends Component {
 
   /**

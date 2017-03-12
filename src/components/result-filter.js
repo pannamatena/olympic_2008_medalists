@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import OnOffSwitch from './on-off-switch';
 
+/**
+ * A component that allows the user to filter countries by their medals.
+ */
 class ResultFilter extends Component {
 
   /**
    * Gets the necessary number of switches to render.
    *
    * @param props - The properties available on this component
-   * @return {Array} Switches to be rendered
+   * @return {Component[]} Switches to be rendered
    */
   getFilterSwitches (props) {
     return Object.keys(props.selectedFilterTypes).map((filterType) =>

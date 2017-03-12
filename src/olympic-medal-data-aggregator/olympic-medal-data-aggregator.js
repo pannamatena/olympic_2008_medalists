@@ -1,3 +1,6 @@
+/**
+ * This class aggregates, sorts and filters data to get medal count by country names.
+ */
 class OlympicMedalDataAggregator {
 
   /**
@@ -6,14 +9,17 @@ class OlympicMedalDataAggregator {
    * @param data - array of objects containing the data by olympic athletes
    * @return {{country: string, gold: number, silver: number, bronze: number, total: number}[]} The unfiltered, sorted data to be displayed
    */
-  getAggregatedData (data) {
+  getMedalCountsByCountry (data) {
     this.validateIncomingDataByType(data);
-    this.validateIncomingDataItemByType(data);
-    this.validateDataItemByKeysForAggregation(data);
+    data.forEach(dataObject => {
+      this.validateIncomingDataItemByType(dataObject);
+      this.validateDataItemByKeysForAggregation(dataObject);
+    });
+
 
     const countryLookup = this.createCountryLookup(data);
-    const resultTableReadableData = this.createResultTableReadableData(countryLookup);
-    return this.sortResultTableData(resultTableReadableData);
+    const resultTableReadableData = this.getCountryListWithTotalCounts(countryLookup);
+    return this.sortCountryList(resultTableReadableData);
   }
 
   /**
@@ -47,7 +53,7 @@ class OlympicMedalDataAggregator {
    * @return {{country: string, gold: number, silver: number, bronze: number, total: number}[]} An array of objects containing medal data by country
    * @private
    */
-  createResultTableReadableData (lookup) {
+  getCountryListWithTotalCounts (lookup) {
     return Object.keys(lookup).map(country => {
       return {
         country: country,
@@ -66,7 +72,7 @@ class OlympicMedalDataAggregator {
    * @return {{country: string, gold: number, silver: number, bronze: number, total: number}[]} Sorted array of objects of medal data by country
    * @private
    */
-  sortResultTableData (resultTableData) {
+  sortCountryList (resultTableData) {
     return resultTableData.sort((firstCountry, secondCountry) => {
       if (secondCountry.total !== firstCountry.total) {
         return secondCountry.total - firstCountry.total;
@@ -96,12 +102,14 @@ class OlympicMedalDataAggregator {
    * @param selectedFilterTypes - An object containing the active and inactive filter types
    * @return {{country: string, gold: number, silver: number, bronze: number, total: number}[]} Filtered array of objects of medal data by country
    */
-  getFilteredResultTableData (aggregatedTableData, selectedFilterTypes) {
+  filterMedalCounts (aggregatedTableData, selectedFilterTypes) {
 
     this.validateIncomingDataByType(aggregatedTableData);
-    this.validateIncomingDataItemByType(aggregatedTableData);
-    this.validateDataItemByKeysForFilter(aggregatedTableData);
-    this.validateDataItemByValuesForFilter(aggregatedTableData);
+    aggregatedTableData.forEach(dataObject => {
+      this.validateIncomingDataItemByType(dataObject);
+      this.validateDataItemByKeysForFilter(dataObject);
+      this.validateDataItemByValuesForFilter(dataObject);
+    });
 
     this.validateFilterTypes(selectedFilterTypes);
     this.validateFilterTypesByKeys(selectedFilterTypes);
@@ -127,57 +135,49 @@ class OlympicMedalDataAggregator {
   /**
    * Validates items in the data given as a parameter by type.
    *
-   * @param data - Array of objects containing medal data
+   * @param dataObject - An object containing medal data
    * @private
    */
-  validateIncomingDataItemByType (data) {
-    data.forEach(dataObject => {
-      if (dataObject.constructor !== Object) {
-        throw new Error('Invalid input data. Expects an array of objects.');
-      }
-    });
+  validateIncomingDataItemByType (dataObject) {
+    if (dataObject.constructor !== Object) {
+      throw new Error('Invalid input data. Expects an array of objects.');
+    }
   }
 
   /**
    * Validates the items in the data given as a parameter for aggregation by keys.
    *
-   * @param data - Array of objects containing medal data
+   * @param dataObject - An object containing medal data
    * @private
    */
-  validateDataItemByKeysForAggregation (data) {
-    data.forEach(dataObject => {
-      if (!dataObject.country || !dataObject.medal) {
-        throw new Error('Invalid input data. Expects an array of objects containing keys country and medal.');
-      }
-    });
+  validateDataItemByKeysForAggregation (dataObject) {
+    if (!dataObject.country || !dataObject.medal) {
+      throw new Error('Invalid input data. Expects an array of objects containing keys country and medal.');
+    }
   }
 
   /**
    * Validates the items in the data given as a parameter for filtering by keys.
    *
-   * @param data - Array of objects containing medal data
+   * @param dataObject - An object containing medal data
    * @private
    */
-  validateDataItemByKeysForFilter (data) {
-    data.forEach(dataObject => {
-      if (typeof dataObject.country === 'undefined' || typeof dataObject.gold === 'undefined' || typeof dataObject.silver === 'undefined' || typeof dataObject.bronze === 'undefined' || typeof dataObject.total === 'undefined') {
-        throw new Error('Invalid input data. Expects an array of objects containing keys country, gold, silver, bronze and total.');
-      }
-    });
+  validateDataItemByKeysForFilter (dataObject) {
+    if (typeof dataObject.country === 'undefined' || typeof dataObject.gold === 'undefined' || typeof dataObject.silver === 'undefined' || typeof dataObject.bronze === 'undefined' || typeof dataObject.total === 'undefined') {
+      throw new Error('Invalid input data. Expects an array of objects containing keys country, gold, silver, bronze and total.');
+    }
   }
 
   /**
    * Validates the items in the data given as a parameter for filtering by values.
    *
-   * @param data - Array of objects containing medal data
+   * @param dataObject - An object containing medal data
    * @private
    */
-  validateDataItemByValuesForFilter (data) {
-    data.forEach(dataObject => {
-      if (typeof dataObject.country !== 'string' || typeof dataObject.gold !== 'number' || typeof dataObject.silver !== 'number' || typeof dataObject.bronze !== 'number' || typeof dataObject.total !== 'number') {
-        throw new Error('Invalid input data. Expects an array of objects containing string values for country and number values for gold, silver, bronze and total.');
-      }
-    });
+  validateDataItemByValuesForFilter (dataObject) {
+    if (typeof dataObject.country !== 'string' || typeof dataObject.gold !== 'number' || typeof dataObject.silver !== 'number' || typeof dataObject.bronze !== 'number' || typeof dataObject.total !== 'number') {
+      throw new Error('Invalid input data. Expects an array of objects containing string values for country and number values for gold, silver, bronze and total.');
+    }
   }
 
   /**
@@ -199,8 +199,8 @@ class OlympicMedalDataAggregator {
    * @private
    */
   validateFilterTypesByKeys (data) {
-    if (!data.gold || !data.silver || !data.bronze) {
-      throw new Error('Invalid input data. Expects an object width keys gold, silver, bronze.');
+    if (typeof data.gold === 'undefined' || typeof data.silver === 'undefined' || typeof data.bronze === 'undefined') {
+      throw new Error('Invalid input data. Expects an object with keys gold, silver, bronze.');
     }
   }
 
@@ -211,7 +211,7 @@ class OlympicMedalDataAggregator {
    */
   validateFilterTypesByValues (data) {
     if (typeof data.gold !== 'boolean' || typeof data.silver !== 'boolean' || typeof data.bronze !== 'boolean') {
-      throw new Error('Invalid input data. Expects an object width boolean values.');
+      throw new Error('Invalid input data. Expects an object with boolean values.');
     }
   }
 

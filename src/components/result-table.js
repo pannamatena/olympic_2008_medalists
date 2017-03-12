@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
+/**
+ * Renders a table with as many rows as the countries to be listed.
+ */
 class ResultTable extends Component {
 
   /**
    * Gets the necessary number of table rows to render.
    *
    * @param resultData - The data to be rendered into the result table
-   * @return {*} The table rows to be rendered
+   * @return {Component[]} The table rows to be rendered
    */
   getTableRows (resultData) {
     return resultData.map((dataItem) =>

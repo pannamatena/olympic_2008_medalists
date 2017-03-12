@@ -3,7 +3,7 @@ import OlympicMedalDataAggregator from '../../../src/olympic-medal-data-aggregat
 
 describe('OlympicMedalDataAggregator', () => {
 
-  describe('getAggregatedData', () => {
+  describe('getMedalCountsByCountry', () => {
     describe('When the data given as a parameter is undefined', () => {
       let aggregator;
 
@@ -13,7 +13,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getAggregatedData(undefined);
+          aggregator.getMedalCountsByCountry(undefined);
         }).to.throw('Invalid input data. Expects an array of objects.');
       });
     });
@@ -25,7 +25,7 @@ describe('OlympicMedalDataAggregator', () => {
       });
 
       it('should return an empty array', () => {
-        const result = aggregator.getAggregatedData([]);
+        const result = aggregator.getMedalCountsByCountry([]);
         expect(result).to.deep.equal([]);
       });
     });
@@ -38,7 +38,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getAggregatedData({notAn: 'array'});
+          aggregator.getMedalCountsByCountry({notAn: 'array'});
         }).to.throw('Invalid input data. Expects an array of objects.');
       });
     });
@@ -51,7 +51,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getAggregatedData([['notAnObject']]);
+          aggregator.getMedalCountsByCountry([['notAnObject']]);
         }).to.throw('Invalid input data. Expects an array of objects.');
       });
     });
@@ -71,7 +71,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getAggregatedData(testData);
+          aggregator.getMedalCountsByCountry(testData);
         }).to.throw('Invalid input data. Expects an array of objects containing keys country and medal.');
       });
     });
@@ -98,13 +98,13 @@ describe('OlympicMedalDataAggregator', () => {
       });
 
       it('should return the aggregated results per country', () => {
-        const result = aggregator.getAggregatedData(testData);
+        const result = aggregator.getMedalCountsByCountry(testData);
         expect(result).to.have.length(2);
       });
     });
   });
 
-  describe('getFilteredResultTableData', () => {
+  describe('filterMedalCounts', () => {
     describe('When the data given as a parameter is undefined', () => {
       let aggregator;
       let filterTypes;
@@ -120,7 +120,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getFilteredResultTableData(undefined, filterTypes);
+          aggregator.filterMedalCounts(undefined, filterTypes);
         }).to.throw('Invalid input data. Expects an array of objects.');
       });
     });
@@ -138,7 +138,7 @@ describe('OlympicMedalDataAggregator', () => {
       });
 
       it('should return an empty array', () => {
-        const result = aggregator.getFilteredResultTableData([], filterTypes);
+        const result = aggregator.filterMedalCounts([], filterTypes);
         expect(result).to.deep.equal([]);
       });
     });
@@ -157,7 +157,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getFilteredResultTableData({notAn: 'array'}, filterTypes);
+          aggregator.filterMedalCounts({notAn: 'array'}, filterTypes);
         }).to.throw('Invalid input data. Expects an array of objects.');
       });
     });
@@ -176,7 +176,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getFilteredResultTableData([['notAnObject']], filterTypes);
+          aggregator.filterMedalCounts([['notAnObject']], filterTypes);
         }).to.throw('Invalid input data. Expects an array of objects.');
       });
     });
@@ -202,7 +202,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getFilteredResultTableData(testData, filterTypes);
+          aggregator.filterMedalCounts(testData, filterTypes);
         }).to.throw('Invalid input data. Expects an array of objects containing keys country, gold, silver, bronze and total.');
       });
     });
@@ -231,7 +231,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getFilteredResultTableData(testData, filterTypes);
+          aggregator.filterMedalCounts(testData, filterTypes);
         }).to.throw('Invalid input data. Expects an array of objects containing string values for country and number values for gold, silver, bronze and total.');
       });
     });
@@ -269,7 +269,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getFilteredResultTableData(testData, undefined);
+          aggregator.filterMedalCounts(testData, undefined);
         }).to.throw('Invalid input data. Expects an object.');
       });
     });
@@ -308,7 +308,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getFilteredResultTableData(testData, filterTypes);
+          aggregator.filterMedalCounts(testData, filterTypes);
         }).to.throw('Invalid input data. Expects an object.');
       });
     });
@@ -347,7 +347,7 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getFilteredResultTableData(testData, filterTypes);
+          aggregator.filterMedalCounts(testData, filterTypes);
         }).to.throw('Invalid input data. Expects an object.');
       });
     });
@@ -389,8 +389,8 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getFilteredResultTableData(testData, filterTypes);
-        }).to.throw('Invalid input data. Expects an object width keys gold, silver, bronze.');
+          aggregator.filterMedalCounts(testData, filterTypes);
+        }).to.throw('Invalid input data. Expects an object with keys gold, silver, bronze.');
       });
     });
     describe('When selectedFilterTypes is an object and has values other than a boolean', () => {
@@ -432,8 +432,8 @@ describe('OlympicMedalDataAggregator', () => {
 
       it('should throw an error', () => {
         expect(() => {
-          aggregator.getFilteredResultTableData(testData, filterTypes);
-        }).to.throw('Invalid input data. Expects an object width boolean values.');
+          aggregator.filterMedalCounts(testData, filterTypes);
+        }).to.throw('Invalid input data. Expects an object with boolean values.');
       });
     });
 
@@ -475,7 +475,7 @@ describe('OlympicMedalDataAggregator', () => {
       });
 
       it('should return the filtered results per country', () => {
-        const result = aggregator.getFilteredResultTableData(testData, filterTypes);
+        const result = aggregator.filterMedalCounts(testData, filterTypes);
         expect(result).to.have.length(3);
       });
     });

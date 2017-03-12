@@ -4,6 +4,9 @@ import OlympicMedalDataAggregator from '../olympic-medal-data-aggregator/olympic
 import ResultTable from './result-table';
 import ResultFilter from './result-filter';
 
+/**
+ * An app that displays the medal table of the 2008 Olympic Games.
+ */
 class App extends Component {
 
   /**
@@ -21,7 +24,7 @@ class App extends Component {
     };
 
     this.dataAggregator = new OlympicMedalDataAggregator();
-    this.aggregatedData = this.dataAggregator.getAggregatedData(olympicsMedalData);
+    this.aggregatedData = this.dataAggregator.getMedalCountsByCountry(olympicsMedalData);
   }
 
   /**
@@ -41,7 +44,7 @@ class App extends Component {
    */
   render() {
 
-    const resultTableDisplayData = this.dataAggregator.getFilteredResultTableData(this.aggregatedData, this.state.selectedFilterTypes);
+    const resultTableDisplayData = this.dataAggregator.filterMedalCounts(this.aggregatedData, this.state.selectedFilterTypes);
 
     return (
       <div className='content-aligner'>
